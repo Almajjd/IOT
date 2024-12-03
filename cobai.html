@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kontrol Lampu - Smart IoT</title>
+  <script src="https://cdn.jsdelivr.net/npm/mqtt/dist/mqtt.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    .lampu-btn {
+      width: 150px;
+      height: 150px;
+      transition: transform 0.3s ease;
+      cursor: pointer;
+    }
+    .lampu-btn:hover {
+      transform: scale(1.1);
+    }
+    .lampu-btn:active {
+      transform: scale(0.95);
+    }
+  </style>
+</head>
+<body class="bg-gray-100">
+
+  <!-- Navbar -->
+  <nav class="bg-indigo-600 p-4">
+    <div class="container mx-auto flex justify-between items-center">
+      <div class="text-white text-2xl font-semibold">
+        Smart IoT Control
+      </div>
+      <div class="space-x-6">
+        <a href="#" class="text-white hover:text-gray-200">Home</a>
+        <a href="#kontrol" class="text-white hover:text-gray-200">Kontrol Lampu</a>
+        <a href="#about" class="text-white hover:text-gray-200">About</a>
+        <a href="#contact" class="text-white hover:text-gray-200">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Kontainer Kontrol Lampu -->
+  <div id="kontrol" class="p-8">
+    <h1 class="text-4xl font-semibold text-center text-indigo-600 mb-10">Kontrol Lampu - Smart IoT</h1>
+
+    <!-- Kontainer Lampu -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 mb-10">
+      <!-- Lampu 1 -->
+      <div class="text-center">
+        <div id="lampu1" class="lampu-btn" onclick="toggleLampu(1, 'Lampu Kamar')">
+          <img id="lampu1Img" src="led-off.png" alt="Lampu 1" class="rounded-lg shadow-lg transition-all">
+        </div>
+        <p class="mt-2 text-gray-600">Lampu Kamar</p>
+      </div>
+
+      <!-- Lampu 2 -->
+      <div class="text-center">
+        <div id="lampu2" class="lampu-btn" onclick="toggleLampu(2, 'Lampu Ruang Tamu')">
+          <img id="lampu2Img" src="led-off.png" alt="Lampu 2" class="rounded-lg shadow-lg transition-all">
+        </div>
+        <p class="mt-2 text-gray-600">Lampu Ruang Tamu</p>
+      </div>
+
+      <!-- Lampu 3 -->
+      <div class="text-center">
+        <div id="lampu3" class="lampu-btn" onclick="toggleLampu(3, 'Lampu Dapur')">
+          <img id="lampu3Img" src="led-off.png" alt="Lampu 3" class="rounded-lg shadow-lg transition-all">
+        </div>
+        <p class="mt-2 text-gray-600">Lampu Dapur</p>
+      </div>
+
+      <!-- Lampu 4 -->
+      <div class="text-center">
+        <div id="lampu4" class="lampu-btn" onclick="toggleLampu(4, 'Lampu Taman')">
+          <img id="lampu4Img" src="led-off.png" alt="Lampu 4" class="rounded-lg shadow-lg transition-all">
+        </div>
+        <p class="mt-2 text-gray-600">Lampu Taman</p>
+      </div>
+
+      <!-- Lampu 5 -->
+      <div class="text-center">
+        <div id="lampu5" class="lampu-btn" onclick="toggleLampu(5, 'Lampu Garasi')">
+          <img id="lampu5Img" src="led-off.png" alt="Lampu 5" class="rounded-lg shadow-lg transition-all">
+        </div>
+        <p class="mt-2 text-gray-600">Lampu Garasi</p>
+      </div>
+
+      <!-- Lampu 6 -->
+      <div class="text-center">
+        <div id="lampu6" class="lampu-btn" onclick="toggleLampu(6, 'Lampu Teras')">
+          <img id="lampu6Img" src="led-off.png" alt="Lampu 6" class="rounded-lg shadow-lg transition-all">
+        </div>
+        <p class="mt-2 text-gray-600">Lampu Teras</p>
+      </div>
+
+      <!-- Lampu 7 -->
+      <div class="text-center">
+        <div id="lampu7" class="lampu-btn" onclick="toggleLampu(7, 'Lampu Kamar Tidur')">
+          <img id="lampu7Img" src="led-off.png" alt="Lampu 7" class="rounded-lg shadow-lg transition-all">
+        </div>
+        <p class="mt-2 text-gray-600">Lampu Kamar Tidur</p>
+      </div>
+
+      <!-- Lampu 8 -->
+      <div class="text-center">
+        <div id="lampu8" class="lampu-btn" onclick="toggleLampu(8, 'Lampu Luar')">
+          <img id="lampu8Img" src="led-off.png" alt="Lampu 8" class="rounded-lg shadow-lg transition-all">
+        </div>
+        <p class="mt-2 text-gray-600">Lampu Luar</p>
+      </div>
+    </div>
+
+    <!-- Tombol Matikan Semua -->
+    <div class="text-center mb-6">
+      <button onclick="turnOffAll()" class="bg-red-500 text-white py-2 px-6 rounded-lg shadow-lg hover:bg-red-600 transition-colors">Matikan Semua Lampu</button>
+    </div>
+
+    <!-- Status Lampu -->
+    <div id="statusLampu" class="text-center mt-10">
+      <p class="text-xl font-medium text-gray-700">Status Lampu: <span id="lampuStatus" class="text-lg font-semibold text-green-600">Semua Lampu Matikan</span></p>
+    </div>
+  </div>
+
+  <!-- About Section -->
+  <div id="about" class="bg-indigo-100 p-8 mt-10">
+    <h2 class="text-3xl font-semibold text-center text-indigo-600">Tentang Smart IoT</h2>
+    <p class="text-center text-gray-700 mt-4 max-w-3xl mx-auto">Smart IoT adalah teknologi yang memungkinkan perangkat elektronik untuk saling berkomunikasi melalui internet. Dengan menggunakan platform seperti MQTT, kita dapat mengontrol berbagai perangkat dari jarak jauh, membuat rumah lebih efisien dan lebih aman. Dalam proyek ini, kami mengintegrasikan kontrol lampu dengan IoT untuk meningkatkan kenyamanan dan efisiensi energi rumah Anda.</p>
+  </div>
+
+  <!-- Contact Section -->
+  <div id="contact" class="bg-gray-800 p-8 mt-10 text-white">
+    <h2 class="text-3xl font-semibold text-center">Kontak Kami</h2>
+    <p class="text-center text-gray-400 mt-4">Email: info@smartiot.com | Telepon: 123-456-7890</p>
+  </div>
+
+  <script>
+    const client = mqtt.connect('ws://broker_address:port'); // Ganti dengan broker MQTT Anda
+    
+    client.on('connect', function () {
+      console.log('Connected to MQTT broker');
+      for (let i = 1; i <= 8; i++) {
+        client.subscribe(`lampu/lampu${i}`);
+      }
+    });
+
+    function toggleLampu(lampu, namaLampu) {
+      const lampuElement = document.getElementById(`lampu${lampu}Img`);
+      const currentState = lampuElement.src.includes('led-off.png') ? 'ON' : 'OFF';
+      
+      // Ganti gambar sesuai status lampu
+      lampuElement.src = currentState === 'ON' ? 'led-on.png' : 'led-off.png';
+      
+      // Kirim pesan ke MQTT
+      client.publish(`lampu/lampu${lampu}`, currentState);
+
+      // Update status dan tampilkan alert
+      const statusText = currentState === 'ON' ? 'Hidup' : 'Mati';
+      const statusColor = currentState === 'ON' ? 'text-green-600' : 'text-red-600';
+      
+      document.getElementById('lampuStatus').innerText = `Lampu ${namaLampu}: ${statusText}`;
+      document.getElementById('lampuStatus').className = `text-lg font-semibold ${statusColor}`;
+    }
+
+    function turnOffAll() {
+      for (let i = 1; i <= 8; i++) {
+        const lampuElement = document.getElementById(`lampu${i}Img`);
+        lampuElement.src = 'led-off.png';
+        client.publish(`lampu/lampu${i}`, 'OFF');
+      }
+      document.getElementById('lampuStatus').innerText = 'Semua Lampu Matikan';
+      document.getElementById('lampuStatus').className = 'text-lg font-semibold text-red-600';
+    }
+  </script>
+</body>
+</html>
