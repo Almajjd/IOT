@@ -163,7 +163,7 @@
 
   <script src="https://cdn.jsdelivr.net/npm/mqtt/dist/mqtt.min.js"></script>
   <script>
-    const brokerUrl = 'ws://broker.emqx.io:8083/mqtt'; // WebSocket URL
+    const brokerUrl = 'wss://broker.emqx.io:8084/mqtt'; // WebSocket URL
     const topic = 'home/lamp'; // Topik untuk mengontrol lampu
     const client = mqtt.connect(brokerUrl);
 
