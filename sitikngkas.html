@@ -170,7 +170,21 @@
     // Saat terhubung ke broker MQTT
     client.on('connect', () => {
       console.log('Connected to MQTT broker');
+      document.getElementById('status').innerText = 'Status: Terhubung ke broker';
+    document.querySelectorAll('button').forEach((button) => {
+      button.disabled = false; // Aktifkan tombol
     });
+    });
+  // Penanganan error
+  client.on('error', (error) => {
+    console.error('Connection failed:', error);
+    document.getElementById('status').innerText = 'Status: Koneksi gagal';
+  });
+
+  client.on('disconnect', () => {
+    console.warn('Disconnected from MQTT broker');
+    document.getElementById('status').innerText = 'Status: Terputus dari broker';
+  });
 
    // Fungsi untuk mengirim perintah ke MQTT
 function sendCommand(command) {
