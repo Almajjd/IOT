@@ -7,10 +7,12 @@
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <style>
     .lampu-btn {
-      width: 150px;
-      height: 150px;
+      width: 120px;
+      height: 120px;
       transition: transform 0.3s ease;
       cursor: pointer;
+      
+     
     }
     .lampu-btn:hover {
       transform: scale(1.1);
@@ -18,99 +20,83 @@
     .lampu-btn:active {
       transform: scale(0.95);
     }
+    .pad{
+        padding: 12px;
+    }
+    .tam{
+        
+    }
   </style>
 </head>
 <body class="bg-gray-100">
 
-    <!-- Navbar -->
-    <nav class="bg-indigo-600 p-4">
-      <div class="container mx-auto flex justify-between items-center">
-        <div class="text-white text-2xl font-semibold">
-          Smart IoT Control
-        </div>
-        <div class="space-x-6">
-          <a href="#" class="text-white hover:text-gray-200">Home</a>
-          <a href="#kontrol" class="text-white hover:text-gray-200">Kontrol Lampu</a>
-          <a href="#about" class="text-white hover:text-gray-200">About</a>
-          <a href="#contact" class="text-white hover:text-gray-200">Contact</a>
-        </div>
+   <!-- Navbar -->
+    
+   <nav class="bg-indigo-600 p-4 shadow-lg">
+    <div class="container mx-auto flex justify-between items-center">
+      <div class="text-white text-2xl font-semibold">
+        Smart IoT Control
       </div>
-    </nav>
-  
-    <!-- Kontainer Kontrol Lampu -->
-    <div id="kontrol" class="p-8">
-      <h1 class="text-4xl font-semibold text-center text-indigo-600 mb-10">Kontrol Lampu - Smart IoT</h1>
-  
-      <!-- Kontainer Lampu -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 mb-10">
-        <!-- Lampu 1 -->
-        <div class="text-center">
-          <div id="lampu1" class="lampu-btn" onclick="toggleLampu(1, 'Lampu Kamar')">
-            <img id="lampu1Img" src="led-off.png" alt="Lampu 1" class="rounded-lg shadow-lg transition-all">
-          </div>
-          <p class="mt-2 text-gray-600">Lampu Kamar</p>
-        </div>
-  
-        <!-- Lampu 2 -->
-        <div class="text-center">
-          <div id="lampu2" class="lampu-btn" onclick="toggleLampu(2, 'Lampu Ruang Tamu')">
-            <img id="lampu2Img" src="led-off.png" alt="Lampu 2" class="rounded-lg shadow-lg transition-all">
-          </div>
-          <p class="mt-2 text-gray-600">Lampu Ruang Tamu</p>
-        </div>
-  
-        <!-- Lampu 3 -->
-        <div class="text-center">
-          <div id="lampu3" class="lampu-btn" onclick="toggleLampu(3, 'Lampu Dapur')">
-            <img id="lampu3Img" src="led-off.png" alt="Lampu 3" class="rounded-lg shadow-lg transition-all">
-          </div>
-          <p class="mt-2 text-gray-600">Lampu Dapur</p>
-        </div>
-  
-        <!-- Lampu 4 -->
-        <div class="text-center">
-          <div id="lampu4" class="lampu-btn" onclick="toggleLampu(4, 'Lampu Taman')">
-            <img id="lampu4Img" src="led-off.png" alt="Lampu 4" class="rounded-lg shadow-lg transition-all">
-          </div>
-          <p class="mt-2 text-gray-600">Lampu Taman</p>
-        </div>
-  
-        <!-- Lampu 5 -->
-        <div class="text-center">
-          <div id="lampu5" class="lampu-btn" onclick="toggleLampu(5, 'Lampu Garasi')">
-            <img id="lampu5Img" src="led-off.png" alt="Lampu 5" class="rounded-lg shadow-lg transition-all">
-          </div>
-          <p class="mt-2 text-gray-600">Lampu Garasi</p>
-        </div>
-  
-        <!-- Lampu 6 -->
-        <div class="text-center">
-          <div id="lampu6" class="lampu-btn" onclick="toggleLampu(6, 'Lampu Teras')">
-            <img id="lampu6Img" src="led-off.png" alt="Lampu 6" class="rounded-lg shadow-lg transition-all">
-          </div>
-          <p class="mt-2 text-gray-600">Lampu Teras</p>
-        </div>
-  
-        <!-- Lampu 7 -->
-        <div class="text-center">
-          <div id="lampu7" class="lampu-btn"  onclick="toggleLampu(7, 'Lampu Kamar Tidur')">
-            <img id="lampu7Img" src="led-off.png" alt="Lampu 7" class="rounded-lg shadow-lg transition-all">
-          </div>
-          <p class="mt-2 text-gray-600">Lampu Kamar Tidur</p>
-        </div>
-  
-        <!-- Lampu 8 -->
-        <div class="text-center">
-          <div id="lampu8" class="lampu-btn" onclick="sendCommand('ON')">
-            <img id="lampu8Img" src="led-off.png" alt="Lampu 8" class="rounded-lg shadow-lg transition-all">
-          </div>
-          <p class="mt-2 text-gray-600">Lampu Luar</p>
-        </div>
+      <div class="space-x-6 hidden md:flex">
+        <a href="#" class="text-white hover:text-gray-200">Home</a>
+        <a href="#kontrol" class="text-white hover:text-gray-200">Kontrol Lampu</a>
+        <a href="#about" class="text-white hover:text-gray-200">About</a>
+        <a href="#contact" class="text-white hover:text-gray-200">Contact</a>
       </div>
+      <!-- Mobile Menu Toggle -->
+      <div class="md:hidden">
+        <button id="mobile-menu-button" class="text-white focus:outline-none">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+   <!-- Mobile Menu -->
+   <div id="mobile-menu"  class="hidden bg-indigo-600 text-white md:hidden p-4 space-y-4">
+    <a href="#" class="block">Home</a>
+    <a href="#kontrol" class="block">Kontrol Lampu</a>
+    <a href="#about" class="block">About</a>
+    <a href="#contact" class="block">Contact</a>
+  </div>
   
-      <!-- Tombol Matikan Semua -->
-      <div class="text-center mb-6">
-        <button onclick="turnOffAll()" class="bg-red-500 text-white py-2 px-6 rounded-lg shadow-lg hover:bg-red-600 transition-colors">Matikan Semua Lampu</button>
+<!-- Lampu Control Section -->
+ <section class="pad">
+  <div class="flex justify-center gap-8 flex-wrap">
+    <div id="lampu1"  class="lampu-btn bg-green-200 rounded-full shadow-lg flex items-center justify-center" onclick="toggleLampu('lampu1')">
+      <span class="text-2xl text-white">Lampu 1</span>
+    </div>
+    <div id="lampu2"class="lampu-btn bg-green-200 rounded-full shadow-lg flex items-center justify-center" onclick="toggleLampu('lampu2')">
+      <span class="text-2xl text-white">Lampu 2</span>
+    </div>
+    <div id="lampu3"class="lampu-btn bg-green-200 rounded-full shadow-lg flex items-center justify-center" onclick="toggleLampu('lampu3')">
+      <span class="text-2xl text-white">Lampu 3</span>
+    </div>
+    <div id="lampu4"class="lampu-btn bg-green-200 rounded-full shadow-lg flex items-center justify-center" onclick="toggleLampu('lampu4')">
+      <span class="text-2xl text-white">Lampu 4</span>
+    </div>
+    <div id="lampu5"class="lampu-btn bg-green-200 rounded-full shadow-lg flex items-center justify-center" onclick="toggleLampu('lampu5')">
+      <span class="text-2xl text-white">Lampu 5</span>
+    </div>
+    <div id="lampu6"class="lampu-btn bg-green-200 rounded-full shadow-lg flex items-center justify-center" onclick="toggleLampu('lampu6')">
+      <span class="text-2xl text-white">Lampu 6</span>
+    </div>
+    <div id="lampu7"class="lampu-btn bg-green-200 rounded-full shadow-lg flex items-center justify-center" onclick="toggleLampu('lampu7')">
+      <span class="text-2xl text-white">Lampu 7</span>
+    </div>
+    <div id="lampu8" class="lampu-btn bg-green-200 rounded-full shadow-lg flex items-center justify-center" onclick="toggleLampu('lampu8')">
+      <span class="text-2xl text-white">Lampu 8</span>
+    </div>
+   
+</section>
+</div>
+   
+
+    <!-- Tombol Matikan Semua -->
+    <div id="lampu9"class="tam text-center mb-6">
+        <button  onclick="toggleLampu('lampu9')" class="bg-green-200 text-white py-2 px-6 rounded-lg shadow-lg ">Matikan Semua Lampu</button>
       </div>
   
       <!-- Status Lampu -->
@@ -118,44 +104,26 @@
         <p class="text-xl font-medium text-gray-700">Status Lampu: <span id="lampuStatus" class="text-lg font-semibold text-green-600">Semua Lampu Matikan</span></p>
       </div>
     </div>
+
+<!-- About Section -->
+<div id="about" class="p-8 bg-gray-200">
+  <h2 class="text-3xl font-semibold text-center mb-6 text-indigo-700">Tentang Kami</h2>
+  <p class="text-lg text-center text-gray-700 max-w-2xl mx-auto">
+    Smart IoT Control adalah platform yang memungkinkan pengguna mengontrol perangkat IoT secara mudah melalui web, memungkinkan akses yang lebih fleksibel untuk berbagai perangkat.
+  </p>
+</div>
+
+<!-- Footer -->
+<footer id="contact" class="bg-indigo-600 p-6 text-center text-white">
+  <p>&copy; 2024 Smart IoT Control. All rights reserved.</p>
+</footer>
+
+
+   
   
-    <!-- About Section -->
-    <div id="about" class="bg-indigo-100 p-8 mt-10">
-      <h2 class="text-3xl font-semibold text-center text-indigo-600">Tentang Smart IoT</h2>
-      <p class="text-center text-gray-700 mt-4 max-w-3xl mx-auto">Smart IoT adalah teknologi yang memungkinkan perangkat elektronik untuk saling berkomunikasi melalui internet. Dengan menggunakan platform seperti MQTT, kita dapat mengontrol berbagai perangkat dari jarak jauh, membuat rumah lebih efisien dan lebih aman. Dalam proyek ini, kami mengintegrasikan kontrol lampu dengan IoT untuk meningkatkan kenyamanan dan efisiensi energi rumah Anda.</p>
-    </div>
+   
+    
   
-    <!-- Contact Section -->
-    <div id="contact" class="bg-gray-800 p-8 mt-10 text-white">
-      <h2 class="text-3xl font-semibold text-center">Kontak Kami</h2>
-      <p class="text-center text-gray-400 mt-4">Email: info@smartiot.com | Telepon: 123-456-7890</p>
-    </div>
-  
-  <h1>Kontrol Lampu ESP32</h1>
-  <button id="onBtn" onclick="sendCommand('ON')">Nyalakan Lampu</button>
-  <button id="offBtn" onclick="sendCommand('OFF')">Matikan Lampu</button>
-  <button id="onBtn" onclick="sendCommand('ON1')">Nyalakan Lampu</button>
-  <button id="offBtn" onclick="sendCommand('OFF1')">Matikan Lampu</button>
-  <button id="onBtn" onclick="sendCommand('ON2')">Nyalakan Lampu</button>
-  <button id="offBtn" onclick="sendCommand('OFF2')">Matikan Lampu</button>
-  <button id="onBtn" onclick="sendCommand('ON3')">Nyalakan Lampu</button>
-  <button id="offBtn" onclick="sendCommand('OFF3')">Matikan Lampu</button>
-  <button id="onBtn" onclick="sendCommand('ON4')">Nyalakan Lampu</button>
-  <button id="offBtn" onclick="sendCommand('OFF4')">Matikan Lampu</button>
-  <button id="onBtn" onclick="sendCommand('ON5')">Nyalakan Lampu</button>
-  <button id="offBtn" onclick="sendCommand('OFF5')">Matikan Lampu</button>
-  <button id="onBtn" onclick="sendCommand('ON6')">Nyalakan Lampu</button>
-  <button id="offBtn" onclick="sendCommand('OFF6')">Matikan Lampu</button>
-  <button id="onBtn" onclick="sendCommand('ON7')">Nyalakan Lampu</button>
-  <button id="offBtn" onclick="sendCommand('OFF7')">Matikan Lampu</button>
-  <button id="onBtn" onclick="sendCommand('ALLON')">Nyalakan Lampu</button>
-  <button id="offBtn" onclick="sendCommand('ALLOFF')">Matikan Lampu</button>
-  <div class="text-center">
-    <div id="lampu7" class="lampu-btn" onclick="toggleLampu(7, 'Lampu Kamar Tidur')">
-      <img id="lampu7Img" src="led-off.png" alt="Lampu 7" class="rounded-lg shadow-lg transition-all">
-    </div>
-    <p class="mt-2 text-gray-600">Lampu Kamar Tidur</p>
-  </div>
   
 
   
@@ -163,9 +131,18 @@
 
   <script src="https://cdn.jsdelivr.net/npm/mqtt/dist/mqtt.min.js"></script>
   <script>
+
     const brokerUrl = 'wss://broker.emqx.io:8084/mqtt'; // WebSocket URL
     const topic = 'home/lamp'; // Topik untuk mengontrol lampu
     const client = mqtt.connect(brokerUrl);
+
+      // Mobile menu toggle functionality
+      const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    mobileMenuButton.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
 
     // Saat terhubung ke broker MQTT
     client.on('connect', () => {
@@ -187,39 +164,72 @@
   });
 
    // Fungsi untuk mengirim perintah ke MQTT
+
+   function toggleLampu(lampu) {
+  let pesan; // Variable untuk menyimpan pesan yang akan dikirim
+  let lampuElement = document.getElementById(lampu); // Ambil elemen tombol berdasarkan ID lampu
+  let isLampuOn = lampuElement.classList.contains('bg-green-400'); // Periksa apakah tombol sudah berwarna hijau (nyala)
+
+  // Tentukan pesan berdasarkan ID tombol yang diklik
+  switch(lampu) {
+    case 'lampu1':
+      pesan = isLampuOn ? 'OFF' : 'ON'; // Jika sudah nyala, kirim 'OFF', jika tidak kirim 'ON'
+      break;
+    case 'lampu2':
+      pesan = isLampuOn ? 'OFF1' : 'ON1';
+      break;
+    case 'lampu3':
+      pesan = isLampuOn ? 'OFF2' : 'ON2';
+      break;
+    case 'lampu4':
+      pesan = isLampuOn ? 'OFF3' : 'ON3';
+      break;
+    case 'lampu5':
+      pesan = isLampuOn ? 'OFF4' : 'ON4';
+      break;
+    case 'lampu6':
+      pesan = isLampuOn ? 'OFF5' : 'ON5';
+      break;
+    case 'lampu7':
+      pesan = isLampuOn ? 'OFF6' : 'ON6';
+      break;
+    case 'lampu8': 
+      pesan = isLampuOn ? 'OFF7' : 'ON7';
+      break;
+    case 'lampu9':
+      pesan = isLampuOn ? 'ALLOFF' : 'ALLON'; // Perintah untuk semua lampu
+      break;
+    default:
+      pesan = 'OFF'; // Default jika tidak ada tombol yang dikenali
+  }
+
+  // Ubah warna tombol sesuai status (nyala/mati)
+  if (isLampuOn) {
+    lampuElement.classList.remove('bg-green-400'); // Jika nyala, ubah jadi mati
+    lampuElement.classList.add('bg-green-200'); // Tombol kembali merah
+  } else {
+    lampuElement.classList.remove('bg-green-200'); // Jika mati, ubah jadi nyala
+    lampuElement.classList.add('bg-green-400'); // Tombol berubah menjadi hijau
+  }
+
+  // Panggil fungsi untuk mengirim perintah
+  sendCommand(pesan);
+}
+
+
 function sendCommand(command) {
-  client.publish('home/lampu', command, { qos: 0 }, (error) => {
+  // Kirim perintah ke server atau broker MQTT
+  client.publish(topic, command, { qos: 0 }, (error) => {
     if (error) {
-      console.error('Failed to send message:', error);
+      console.error('Failed to send message:', error); // Jika gagal, tampilkan error
     } else {
-      document.getElementById('status').innerText = 'Status: Lampu ' + (command === 'ON' ? 'nyala' : 'mati');
+      document.getElementById('status').innerText = 'Status: Lampu ' + (command.includes('ON') ? 'nyala' : 'mati');
     }
   });
 }
 
-// Fungsi untuk toggle lampu dan mengirim perintah ke MQTT
-function toggleLampu(lampu, namaLampu) {
-  const lampuElement = document.getElementById(`lampu${lampu}Img`);
-  const currentState = lampuElement.src.includes('led-off.png') ? 1 : 0;  // 1 = ON, 0 = OFF
 
-  // Ganti gambar lampu sesuai status
-  if (currentState === 1) {
-    lampuElement.src = 'led-on.png';  // Ganti gambar jadi nyala
-    sendCommand('ON');  // Kirim perintah ON ke MQTT
-  } else {
-    lampuElement.src = 'led-off.png';  // Ganti gambar jadi mati
-    sendCommand('OFF');  // Kirim perintah OFF ke MQTT
-  }
-}
-function sendCommand(command) {
-      client.publish(topic, command, { qos: 0 }, (error) => {
-        if (error) {
-          console.error('Failed to send message:', error);
-        } else {
-          document.getElementById('status').innerText = 'Status: Lampu ' + (command === 'ON' ? 'nyala' : 'mati');
-        } 
-      });
-    }
+
 
 // Terima pesan dari broker (optional)
 client.on('message', (topic, message) => {
@@ -231,3 +241,4 @@ client.on('message', (topic, message) => {
   </script>
 </body>
 </html>
+style.backgroundColor = "blue";
