@@ -65,31 +65,28 @@
 <!-- Lampu Control Section -->
  <section class="pad">
   <div class="flex justify-center gap-8 flex-wrap">
-    <div id="lampu1"  class="lampu-btn bg-green-200 rounded-full shadow-lg flex items-center justify-center" onclick="toggleLampu('lampu1')">
+    <div id="lampu1"  class="lampu-btn bg-green-400 rounded-full shadow-lg flex items-center justify-center" onclick="toggleLampu('lampu1')">
       <span class="text-2xl text-white">Lampu 1</span>
     </div>
-    <div id="lampu2"class="lampu-btn bg-green-200 rounded-full shadow-lg flex items-center justify-center" onclick="toggleLampu('lampu2')">
+    <div id="lampu2"class="lampu-btn bg-green-400 rounded-full shadow-lg flex items-center justify-center" onclick="toggleLampu('lampu2')">
       <span class="text-2xl text-white">Lampu 2</span>
     </div>
-    <div id="lampu3"class="lampu-btn bg-green-200 rounded-full shadow-lg flex items-center justify-center" onclick="toggleLampu('lampu3')">
+    <div id="lampu3"class="lampu-btn bg-green-400 rounded-full shadow-lg flex items-center justify-center" onclick="toggleLampu('lampu3')">
       <span class="text-2xl text-white">Lampu 3</span>
     </div>
-    <div id="lampu4"class="lampu-btn bg-green-200 rounded-full shadow-lg flex items-center justify-center" onclick="toggleLampu('lampu4')">
+    <div id="lampu4"class="lampu-btn bg-green-400 rounded-full shadow-lg flex items-center justify-center" onclick="toggleLampu('lampu4')">
       <span class="text-2xl text-white">Lampu 4</span>
     </div>
-    <div id="lampu5"class="lampu-btn bg-green-200 rounded-full shadow-lg flex items-center justify-center" onclick="toggleLampu('lampu5')">
+    <div id="lampu5"class="lampu-btn bg-green-400 rounded-full shadow-lg flex items-center justify-center" onclick="toggleLampu('lampu5')">
       <span class="text-2xl text-white">Lampu 5</span>
     </div>
-    <div id="lampu6"class="lampu-btn bg-green-200 rounded-full shadow-lg flex items-center justify-center" onclick="toggleLampu('lampu6')">
+    <div id="lampu6"class="lampu-btn bg-green-400 rounded-full shadow-lg flex items-center justify-center" onclick="toggleLampu('lampu6')">
       <span class="text-2xl text-white">Lampu 6</span>
     </div>
-    <div id="lampu7"class="lampu-btn bg-green-200 rounded-full shadow-lg flex items-center justify-center" onclick="toggleLampu('lampu7')">
+    <div id="lampu7"class="lampu-btn bg-green-400 rounded-full shadow-lg flex items-center justify-center" onclick="toggleLampu('lampu7')">
       <span class="text-2xl text-white">Lampu 7</span>
     </div>
-    <div id="lampu8" class="lampu-btn bg-green-200 rounded-full shadow-lg flex items-center justify-center" onclick="toggleLampu('lampu8')">
-      <span class="text-2xl text-white">Lampu 8</span>
-    </div>
-   
+
 </section>
 </div>
    
@@ -205,11 +202,11 @@
 
   // Ubah warna tombol sesuai status (nyala/mati)
   if (isLampuOn) {
-    lampuElement.classList.remove('bg-green-400'); // Jika nyala, ubah jadi mati
-    lampuElement.classList.add('bg-green-200'); // Tombol kembali merah
+    lampuElement.classList.remove('bg-green-200'); // Jika nyala, ubah jadi mati
+    lampuElement.classList.add('bg-green-400'); // Tombol kembali merah
   } else {
-    lampuElement.classList.remove('bg-green-200'); // Jika mati, ubah jadi nyala
-    lampuElement.classList.add('bg-green-400'); // Tombol berubah menjadi hijau
+    lampuElement.classList.remove('bg-green-400'); // Jika mati, ubah jadi nyala
+    lampuElement.classList.add('bg-green-200'); // Tombol berubah menjadi hijau
   }
 
   // Panggil fungsi untuk mengirim perintah
