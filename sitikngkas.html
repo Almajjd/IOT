@@ -128,27 +128,27 @@
 
   <script src="https://cdn.jsdelivr.net/npm/mqtt/dist/mqtt.min.js"></script>
   <script>
+  const brokerUrl = 'wss://broker.emqx.io:8084/mqtt'; // WebSocket URL
+  const topic = 'home/lamp'; // Topik untuk mengontrol lampu
+  const client = mqtt.connect(brokerUrl);
 
-    const brokerUrl = 'wss://broker.emqx.io:8084/mqtt'; // WebSocket URL
-    const topic = 'home/lamp'; // Topik untuk mengontrol lampu
-    const client = mqtt.connect(brokerUrl);
+  // Mobile menu toggle functionality
+  const mobileMenuButton = document.getElementById('mobile-menu-button');
+  const mobileMenu = document.getElementById('mobile-menu');
 
-      // Mobile menu toggle functionality
-      const mobileMenuButton = document.getElementById('mobile-menu-button');
-    const mobileMenu = document.getElementById('mobile-menu');
+  mobileMenuButton.addEventListener('click', () => {
+    mobileMenu.classList.toggle('hidden');
+  });
 
-    mobileMenuButton.addEventListener('click', () => {
-      mobileMenu.classList.toggle('hidden');
-    });
-
-    // Saat terhubung ke broker MQTT
-    client.on('connect', () => {
-      console.log('Connected to MQTT broker');
-      document.getElementById('status').innerText = 'Status: Terhubung ke broker';
+  // Saat terhubung ke broker MQTT
+  client.on('connect', () => {
+    console.log('Connected to MQTT broker');
+    document.getElementById('status').innerText = 'Status: Terhubung ke broker';
     document.querySelectorAll('button').forEach((button) => {
       button.disabled = false; // Aktifkan tombol
     });
-    });
+  });
+
   // Penanganan error
   client.on('error', (error) => {
     console.error('Connection failed:', error);
@@ -160,82 +160,72 @@
     document.getElementById('status').innerText = 'Status: Terputus dari broker';
   });
 
-   // Fungsi untuk mengirim perintah ke MQTT
+  // Fungsi untuk mengirim perintah ke MQTT
+  function toggleLampu(lampu) {
+    let pesan; // Variabel untuk menyimpan pesan yang akan dikirim
+    let lampuElement = document.getElementById(lampu); // Ambil elemen tombol berdasarkan ID lampu
+    let isLampuOn = lampuElement.classList.contains('bg-yellow-400'); // Periksa apakah tombol sudah berwarna kuning (nyala)
 
-   function toggleLampu(lampu) {
-  let pesan; // Variable untuk menyimpan pesan yang akan dikirim
-  let lampuElement = document.getElementById(lampu); // Ambil elemen tombol berdasarkan ID lampu
-  let isLampuOn = lampuElement.classList.contains('bg-green-400'); // Periksa apakah tombol sudah berwarna hijau (nyala)
-
-  // Tentukan pesan berdasarkan ID tombol yang diklik
-  switch(lampu) {
-    case 'lampu1':
-      pesan = isLampuOn ? 'OFF' : 'ON'; // Jika sudah nyala, kirim 'OFF', jika tidak kirim 'ON'
-      break;
-    case 'lampu2':
-      pesan = isLampuOn ? 'OFF1' : 'ON1';
-      break;
-    case 'lampu3':
-      pesan = isLampuOn ? 'OFF2' : 'ON2';
-      break;
-    case 'lampu4':
-      pesan = isLampuOn ? 'OFF3' : 'ON3';
-      break;
-    case 'lampu5':
-      pesan = isLampuOn ? 'OFF4' : 'ON4';
-      break;
-    case 'lampu6':
-      pesan = isLampuOn ? 'OFF5' : 'ON5';
-      break;
-    case 'lampu7':
-      pesan = isLampuOn ? 'OFF6' : 'ON6';
-      break;
-    case 'lampu8': 
-      pesan = isLampuOn ? 'OFF7' : 'ON7';
-      break;
-    case 'lampu9':
-      pesan = isLampuOn ? 'ALLOFF' : 'ALLON'; // Perintah untuk semua lampu
-      break;
-    default:
-      pesan = 'OFF'; // Default jika tidak ada tombol yang dikenali
-  }
-
-  // Ubah warna tombol sesuai status (nyala/mati)
-  if (isLampuOn) {
-    lampuElement.classList.remove('bg-green-200'); // Jika nyala, ubah jadi mati
-    lampuElement.classList.add('bg-green-400'); // Tombol kembali merah
-  } else {
-    lampuElement.classList.remove('bg-green-400'); // Jika mati, ubah jadi nyala
-    lampuElement.classList.add('bg-green-200'); // Tombol berubah menjadi hijau
-  }
-
-  // Panggil fungsi untuk mengirim perintah
-  sendCommand(pesan);
-}
-
-
-function sendCommand(command) {
-  // Kirim perintah ke server atau broker MQTT
-  client.publish(topic, command, { qos: 0 }, (error) => {
-    if (error) {
-      console.error('Failed to send message:', error); // Jika gagal, tampilkan error
-    } else {
-      document.getElementById('status').innerText = 'Status: Lampu ' + (command.includes('ON') ? 'nyala' : 'mati');
+    // Tentukan pesan berdasarkan ID tombol yang diklik
+    switch (lampu) {
+      case 'lampu1':
+        pesan = isLampuOn ? 'OFF' : 'ON';
+        break;
+      case 'lampu2':
+        pesan = isLampuOn ? 'OFF1' : 'ON1';
+        break;
+      case 'lampu3':
+        pesan = isLampuOn ? 'OFF2' : 'ON2';
+        break;
+      case 'lampu4':
+        pesan = isLampuOn ? 'OFF3' : 'ON3';
+        break;
+      case 'lampu5':
+        pesan = isLampuOn ? 'OFF4' : 'ON4';
+        break;
+      case 'lampu6':
+        pesan = isLampuOn ? 'OFF5' : 'ON5';
+        break;
+      case 'lampu7':
+        pesan = isLampuOn ? 'OFF6' : 'ON6';
+        break;
+      case 'lampu9':
+        pesan = 'ALLOFF';
+        break;
+      default:
+        pesan = 'OFF'; // Default jika tidak ada tombol yang dikenali
     }
+
+    // Ubah warna tombol sesuai status (nyala/mati)
+    if (isLampuOn) {
+      lampuElement.classList.remove('bg-yellow-400'); // Jika nyala, ubah jadi mati
+      lampuElement.classList.add('bg-green-200'); // Tombol menjadi hijau
+    } else {
+      lampuElement.classList.remove('bg-green-200'); // Jika mati, ubah jadi nyala
+      lampuElement.classList.add('bg-yellow-400'); // Tombol berubah menjadi kuning
+    }
+
+    // Panggil fungsi untuk mengirim perintah
+    sendCommand(pesan);
+  }
+
+  function sendCommand(command) {
+    // Kirim perintah ke server atau broker MQTT
+    client.publish(topic, command, { qos: 0 }, (error) => {
+      if (error) {
+        console.error('Failed to send message:', error); // Jika gagal, tampilkan error
+      } else {
+        document.getElementById('status').innerText = 'Status: Lampu ' + (command.includes('ON') ? 'nyala' : 'mati');
+      }
+    });
+  }
+
+  // Terima pesan dari broker (opsional)
+  client.on('message', (topic, message) => {
+    console.log(`Received message on topic ${topic}: ${message.toString()}`);
   });
-}
 
+  // Subscribe ke topik
+  client.subscribe(topic);
+</script>
 
-
-
-// Terima pesan dari broker (optional)
-client.on('message', (topic, message) => {
-  console.log(`Received message on topic ${topic}: ${message.toString()}`);
-});
-
-    // Subscribe ke topik
-    client.subscribe(topic);
-  </script>
-</body>
-</html>
-style.backgroundColor = "blue";
