@@ -11,8 +11,7 @@
       height: 120px;
       transition: transform 0.3s ease;
       cursor: pointer;
-      
-     
+      padding: 12px;
     }
     .lampu-btn:hover {
       transform: scale(1.1);
@@ -20,212 +19,140 @@
     .lampu-btn:active {
       transform: scale(0.95);
     }
-    .pad{
-        padding: 12px;
+
+    .lampu-btn-mass {
+      width: 180px;
+      height: 50px;
+      transition: transform 0.3s ease;
+      cursor: pointer;
+      background-color: #38a169; /* Default hijau */
+      color: white;
+      text-align: center;
+      line-height: 50px;
+      border-radius: 10px;
     }
-    .tam{
-        
+    .lampu-btn-mass:hover {
+      transform: scale(1.1);
+      background-color: #2f855a;
+    }
+    .lampu-btn-mass:active {
+      transform: scale(0.95);
+      background-color: #276749;
     }
   </style>
 </head>
 <body class="bg-gray-100">
 
-   <!-- Navbar -->
-    
-   <nav class="bg-indigo-600 p-4 shadow-lg">
+  <!-- Navbar -->
+  <nav class="bg-indigo-600 p-4 shadow-lg">
     <div class="container mx-auto flex justify-between items-center">
-      <div class="text-white text-2xl font-semibold">
-        Smart IoT Control
-      </div>
-      <div class="space-x-6 hidden md:flex">
-        <a href="#" class="text-white hover:text-gray-200">Home</a>
-        <a href="#kontrol" class="text-white hover:text-gray-200">Kontrol Lampu</a>
-        <a href="#about" class="text-white hover:text-gray-200">About</a>
-        <a href="#contact" class="text-white hover:text-gray-200">Contact</a>
-      </div>
-      <!-- Mobile Menu Toggle -->
-      <div class="md:hidden">
-        <button id="mobile-menu-button" class="text-white focus:outline-none">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-          </svg>
-        </button>
-      </div>
+      <div class="text-white text-2xl font-semibold">Smart IoT Control</div>
     </div>
   </nav>
 
-   <!-- Mobile Menu -->
-   <div id="mobile-menu"  class="hidden bg-indigo-600 text-white md:hidden p-4 space-y-4">
-    <a href="#" class="block">Home</a>
-    <a href="#kontrol" class="block">Kontrol Lampu</a>
-    <a href="#about" class="block">About</a>
-    <a href="#contact" class="block">Contact</a>
+  <!-- Lampu Control Section -->
+  <section class="pad">
+    <div class="flex justify-center gap-8 flex-wrap">
+      <div id="lampu1" class="lampu-btn bg-green-200 rounded-full shadow-lg flex items-center justify-center" onclick="toggleLampu('lampu1')">
+        <span class="text-2xl text-white">Lampu 1</span>
+      </div>
+      <div id="lampu2" class="lampu-btn bg-green-200 rounded-full shadow-lg flex items-center justify-center" onclick="toggleLampu('lampu2')">
+        <span class="text-2xl text-white">Lampu 2</span>
+      </div>
+      <div id="lampu3" class="lampu-btn bg-green-200 rounded-full shadow-lg flex items-center justify-center" onclick="toggleLampu('lampu3')">
+        <span class="text-2xl text-white">Lampu 3</span>
+      </div>
+      <div id="lampu4" class="lampu-btn bg-green-200 rounded-full shadow-lg flex items-center justify-center" onclick="toggleLampu('lampu4')">
+        <span class="text-2xl text-white">Lampu 4</span>
+      </div>
+      <div id="lampu5" class="lampu-btn bg-green-200 rounded-full shadow-lg flex items-center justify-center" onclick="toggleLampu('lampu5')">
+        <span class="text-2xl text-white">Lampu 5</span>
+      </div>
+      <div id="lampu6" class="lampu-btn bg-green-200 rounded-full shadow-lg flex items-center justify-center" onclick="toggleLampu('lampu6')">
+        <span class="text-2xl text-white">Lampu 6</span>
+      </div>
+      <div id="lampu7" class="lampu-btn bg-green-200 rounded-full shadow-lg flex items-center justify-center" onclick="toggleLampu('lampu7')">
+        <span class="text-2xl text-white">Lampu 7</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tombol Hidupkan dan Matikan Semua -->
+  <div class="text-center mt-6 mb-6">
+    <button onclick="toggleLampuMass('ALLON')" class="lampu-btn-mass">Hidupkan Semua Lampu</button>
+    <button onclick="toggleLampuMass('ALLOFF')" class="lampu-btn-mass">Matikan Semua Lampu</button>
   </div>
-  
-<!-- Lampu Control Section -->
- <section class="pad">
-  <div class="flex justify-center gap-8 flex-wrap">
-    <div id="lampu1"  class="lampu-btn bg-green-200 rounded-full shadow-lg flex items-center justify-center" onclick="toggleLampu('lampu1')">
-      <span class="text-2xl text-white">Lampu 1</span>
-    </div>
-    <div id="lampu2"class="lampu-btn bg-green-200 rounded-full shadow-lg flex items-center justify-center" onclick="toggleLampu('lampu2')">
-      <span class="text-2xl text-white">Lampu 2</span>
-    </div>
-    <div id="lampu3"class="lampu-btn bg-green-200 rounded-full shadow-lg flex items-center justify-center" onclick="toggleLampu('lampu3')">
-      <span class="text-2xl text-white">Lampu 3</span>
-    </div>
-    <div id="lampu4"class="lampu-btn bg-green-200 rounded-full shadow-lg flex items-center justify-center" onclick="toggleLampu('lampu4')">
-      <span class="text-2xl text-white">Lampu 4</span>
-    </div>
-    <div id="lampu5"class="lampu-btn bg-green-200 rounded-full shadow-lg flex items-center justify-center" onclick="toggleLampu('lampu5')">
-      <span class="text-2xl text-white">Lampu 5</span>
-    </div>
-    <div id="lampu6"class="lampu-btn bg-green-200 rounded-full shadow-lg flex items-center justify-center" onclick="toggleLampu('lampu6')">
-      <span class="text-2xl text-white">Lampu 6</span>
-    </div>
-    <div id="lampu7"class="lampu-btn bg-green-200 rounded-full shadow-lg flex items-center justify-center" onclick="toggleLampu('lampu7')">
-      <span class="text-2xl text-white">Lampu 7</span>
-    </div>
 
-</section>
-</div>
-   
+  <!-- Status Lampu -->
+  <div id="statusLampu" class="text-center mt-10">
+    <p class="text-xl font-medium text-gray-700">Status Lampu: <span id="lampuStatus" class="text-lg font-semibold text-green-600">Semua Lampu Mati</span></p>
+  </div>
 
-    <!-- Tombol Matikan Semua -->
-    <div id="lampu9"class="tam text-center mb-6">
-        <button  onclick="toggleLampu('lampu9')" class="bg-green-200 text-white py-2 px-6 rounded-lg shadow-lg ">Matikan Semua Lampu</button>
-      </div>
-  
-      <!-- Status Lampu -->
-      <div id="statusLampu" class="text-center mt-10">
-        <p class="text-xl font-medium text-gray-700">Status Lampu: <span id="lampuStatus" class="text-lg font-semibold text-green-600">Semua Lampu Matikan</span></p>
-      </div>
-    </div>
-
-<!-- About Section -->
-<div id="about" class="p-8 bg-gray-200">
-  <h2 class="text-3xl font-semibold text-center mb-6 text-indigo-700">Tentang Kami</h2>
-  <p class="text-lg text-center text-gray-700 max-w-2xl mx-auto">
-    Smart IoT Control adalah platform yang memungkinkan pengguna mengontrol perangkat IoT secara mudah melalui web, memungkinkan akses yang lebih fleksibel untuk berbagai perangkat.
-  </p>
-</div>
-
-<!-- Footer -->
-<footer id="contact" class="bg-indigo-600 p-6 text-center text-white">
-  <p>&copy; 2024 Smart IoT Control. All rights reserved.</p>
-</footer>
-
-
-   
-  
-   
-    
-  
-  
-
-  
-  <div id="status">Status: Lampu mati</div>
+  <footer class="bg-indigo-600 p-6 text-center text-white">
+    <p>&copy; 2024 Smart IoT Control. All rights reserved.</p>
+  </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/mqtt/dist/mqtt.min.js"></script>
   <script>
-  const brokerUrl = 'wss://broker.emqx.io:8084/mqtt'; // WebSocket URL
-  const topic = 'home/lamp'; // Topik untuk mengontrol lampu
-  const client = mqtt.connect(brokerUrl);
+    const brokerUrl = 'wss://broker.emqx.io:8084/mqtt';
+    const topic = 'home/lamp';
+    const client = mqtt.connect(brokerUrl);
 
-  // Mobile menu toggle functionality
-  const mobileMenuButton = document.getElementById('mobile-menu-button');
-  const mobileMenu = document.getElementById('mobile-menu');
-
-  mobileMenuButton.addEventListener('click', () => {
-    mobileMenu.classList.toggle('hidden');
-  });
-
-  // Saat terhubung ke broker MQTT
-  client.on('connect', () => {
-    console.log('Connected to MQTT broker');
-    document.getElementById('status').innerText = 'Status: Terhubung ke broker';
-    document.querySelectorAll('button').forEach((button) => {
-      button.disabled = false; // Aktifkan tombol
+    client.on('connect', () => {
+      console.log('Connected to MQTT broker');
+      document.getElementById('lampuStatus').innerText = 'Status: Terhubung ke broker';
     });
-  });
 
-  // Penanganan error
-  client.on('error', (error) => {
-    console.error('Connection failed:', error);
-    document.getElementById('status').innerText = 'Status: Koneksi gagal';
-  });
+    client.on('error', (error) => {
+      console.error('Connection failed:', error);
+      document.getElementById('lampuStatus').innerText = 'Status: Koneksi gagal';
+    });
 
-  client.on('disconnect', () => {
-    console.warn('Disconnected from MQTT broker');
-    document.getElementById('status').innerText = 'Status: Terputus dari broker';
-  });
+    function toggleLampu(lampu) {
+      let lampuElement = document.getElementById(lampu);
+      let isLampuOn = lampuElement.classList.contains('bg-yellow-400');
 
-  // Fungsi untuk mengirim perintah ke MQTT
-  function toggleLampu(lampu) {
-    let pesan; // Variabel untuk menyimpan pesan yang akan dikirim
-    let lampuElement = document.getElementById(lampu); // Ambil elemen tombol berdasarkan ID lampu
-    let isLampuOn = lampuElement.classList.contains('bg-yellow-400'); // Periksa apakah tombol sudah berwarna kuning (nyala)
-
-    // Tentukan pesan berdasarkan ID tombol yang diklik
-    switch (lampu) {
-      case 'lampu1':
-        pesan = isLampuOn ? 'OFF' : 'ON';
-        break;
-      case 'lampu2':
-        pesan = isLampuOn ? 'OFF1' : 'ON1';
-        break;
-      case 'lampu3':
-        pesan = isLampuOn ? 'OFF2' : 'ON2';
-        break;
-      case 'lampu4':
-        pesan = isLampuOn ? 'OFF3' : 'ON3';
-        break;
-      case 'lampu5':
-        pesan = isLampuOn ? 'OFF4' : 'ON4';
-        break;
-      case 'lampu6':
-        pesan = isLampuOn ? 'OFF5' : 'ON5';
-        break;
-      case 'lampu7':
-        pesan = isLampuOn ? 'OFF6' : 'ON6';
-        break;
-      case 'lampu9':
-        pesan = 'ALLOFF';
-        break;
-      default:
-        pesan = 'OFF'; // Default jika tidak ada tombol yang dikenali
-    }
-
-    // Ubah warna tombol sesuai status (nyala/mati)
-    if (isLampuOn) {
-      lampuElement.classList.remove('bg-yellow-400'); // Jika nyala, ubah jadi mati
-      lampuElement.classList.add('bg-green-200'); // Tombol menjadi hijau
-    } else {
-      lampuElement.classList.remove('bg-green-200'); // Jika mati, ubah jadi nyala
-      lampuElement.classList.add('bg-yellow-400'); // Tombol berubah menjadi kuning
-    }
-
-    // Panggil fungsi untuk mengirim perintah
-    sendCommand(pesan);
-  }
-
-  function sendCommand(command) {
-    // Kirim perintah ke server atau broker MQTT
-    client.publish(topic, command, { qos: 0 }, (error) => {
-      if (error) {
-        console.error('Failed to send message:', error); // Jika gagal, tampilkan error
+      // Ubah warna tombol sesuai status
+      if (isLampuOn) {
+        lampuElement.classList.remove('bg-yellow-400');
+        lampuElement.classList.add('bg-green-200');
+        sendCommand('OFF' + lampu.charAt(lampu.length - 1));
       } else {
-        document.getElementById('status').innerText = 'Status: Lampu ' + (command.includes('ON') ? 'nyala' : 'mati');
+        lampuElement.classList.remove('bg-green-200');
+        lampuElement.classList.add('bg-yellow-400');
+        sendCommand('ON' + lampu.charAt(lampu.length - 1));
       }
-    });
-  }
+    }
 
-  // Terima pesan dari broker (opsional)
-  client.on('message', (topic, message) => {
-    console.log(`Received message on topic ${topic}: ${message.toString()}`);
-  });
+    function toggleLampuMass(action) {
+      const lampuButtons = document.querySelectorAll('.lampu-btn');
+      const turnOn = action === 'ALLON';
 
-  // Subscribe ke topik
-  client.subscribe(topic);
-</script>
+      lampuButtons.forEach((button) => {
+        if (turnOn) {
+          button.classList.remove('bg-green-200');
+          button.classList.add('bg-yellow-400');
+        } else {
+          button.classList.remove('bg-yellow-400');
+          button.classList.add('bg-green-200');
+        }
+      });
 
+      sendCommand(action);
+      document.getElementById('lampuStatus').innerText = turnOn
+        ? 'Semua Lampu Hidup'
+        : 'Semua Lampu Mati';
+    }
+
+    function sendCommand(command) {
+      client.publish(topic, command, { qos: 0 }, (error) => {
+        if (error) {
+          console.error('Failed to send message:', error);
+        } else {
+          console.log(`Command sent: ${command}`);
+        }
+      });
+    }
+  </script>
+</body>
+</html>
